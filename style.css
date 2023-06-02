@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background: #000 url('background.jpg');
+    background: #000 url('../img/background.jpg');
     overflow-x: hidden;
     background-repeat: no-repeat;
     background-size: cover;
@@ -13,11 +13,33 @@ body {
 
 }
 
+.description {
+
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    color:#fff;
+    padding: 0 25vw;
+}
+
+.description h2 {
+    color: #ffff00
+}
+
+.description img {
+
+    border-color: #fff;
+    border-width: 3px;
+    border-style: inset;
+
+}
+
 .navbar {
     background: #333;
     padding: 15px;
     height: 40px;
     color: #fff;
+
+    transition: transform 1s ease-out;
 }
 
 .navbar h1 {
@@ -26,7 +48,7 @@ body {
 }
 
 .top-container {
-    width: 500px;
+    width: 50%;
     margin: 30px auto;
 }
 
@@ -36,6 +58,16 @@ body {
     margin: 0;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #fff
+
+}
+
+.top-container video {
+
+    display:block;
+    margin:auto;
+    border-color: #fff;
+    border-width: 5px;
+    border-style: groove;
 
 }
 
@@ -78,10 +110,29 @@ body {
 }
 
 .bottom-container {
-    padding: 15px;
+    margin: auto;
+}
 
+#photos {
+
+    display:block;
+    margin:auto;
+
+}
+
+#photos img {
+    display:block;
+    margin:auto;
+    border-color: #000;
+    border-width: 5px;
+    border-style: groove;
 }
 
 #canvas {
     display: none;
 }
+
+#photo-button {
+    display:none;
+}
+
