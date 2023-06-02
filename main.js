@@ -166,7 +166,7 @@ async function buildArrays() {
 
         while (i < numphotos) {
             let image = new Image();
-            image.src = '../js/' + i + '.jpg';
+            image.src = i + '.jpg';
             tilenames[i] = image;
             i++;
         }
