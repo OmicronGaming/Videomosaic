@@ -1,12 +1,19 @@
+/* 
+Code is a little scuffed because I used a lot of pre-existing code
+and combined streams. Will prolly fix later on
+*/
+
 // Global Vars
 
 let width = 500,
     height = 0,
     filter = 'none',
     streaming = false,
-    numphotos = 154;
-    tileSize = 8; // length of one side of square in pixels
-    qualityup = 2;
+    numphotos = 154,
+    tileSize = 9, // length of one side of square in pixels
+    qualityup = 2,
+    videoon = false,
+    intervalID = null;
 
 // DOM elements
 
@@ -14,6 +21,7 @@ const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const photos = document.getElementById('photos');
 const photoButton = document.getElementById('photo-button');
+const videoButton = document.getElementById('video-button');
 const clearButton = document.getElementById('clear-button');
 
 // Get media stream
@@ -47,11 +55,11 @@ navigator.mediaDevices.getUserMedia({video: true, audio: false})
             streaming = true;
         }
 
-    clearButton.addEventListener('click', function() {
+    /*clearButton.addEventListener('click', function() {
         // Clear photos
         photos.innerHTML = '';
     }, false);
-    })
+    }*/});
 
 function imageToRGB(image) {
 
@@ -190,11 +198,11 @@ async function buildArrays() {
             })
         })
 
-        tilenames.forEach(image => { // Test to see photos load
+        /*tilenames.forEach(image => { // Test to see photos load
 
-            // photos.appendChild(image);
+            photos.appendChild(image);
 
-        })
+        })*/
 
     });
 }
@@ -214,56 +222,99 @@ buildArrays().then(rtrnvalue => {
 
     photoButton.addEventListener('click', function(error) {
 
-        inputcanvas.setAttribute('width', width);
-        inputcanvas.setAttribute('height', height);
-
-        ctxi.drawImage(video, 0, 0, width, height);
-
-        let numRows = Math.ceil(inputcanvas.height / tileSize);
-        let numCols = Math.ceil(inputcanvas.width / tileSize);
-
-        let outputwidth = qualityup*numCols * tileSize;
-        let outputheight = qualityup*numRows * tileSize;
-
-        outputcanvas.setAttribute('width', outputwidth);
-        outputcanvas.setAttribute('height', outputheight);
-
-        for (let r = 0; r < numRows; r++) {
-            for (let c = 0; c < numCols; c++) {
-
-                let xcoord = c * tileSize;
-                let ycoord = r * tileSize;
-
-                let dataOfTile = ctxi.getImageData(xcoord, ycoord, tileSize, tileSize);
-
-                let data = dataOfTile.data;
-                let tilergbArray = [];
-
-                for (let k = 0; k < data.length; k +=4) {
-
-                    let red = data[k];
-                    let green = data[k+1];
-                    let blue = data[k+1];
-                    tilergbArray.push([red,green,blue]);
-                }
-
-                let nearestimage = findNearestTile(tilergbs, tilenames, tilergbArray);
-                ctxo.drawImage(nearestimage, qualityup*xcoord, qualityup*ycoord, qualityup*tileSize, qualityup*tileSize);
-            }
-        }
-
-        const outputUrl = outputcanvas.toDataURL('image/png');
-
-        // Create img element
-        const outputimg = document.createElement('img');
-
-        // Set img src
-        outputimg.setAttribute('src', outputUrl);
-
-        // Add img to photos
-        photos.appendChild(outputimg);
+        MakeVideoStream(inputcanvas, outputcanvas, ctxi, ctxo, tilergbs, tilenames);
 
         error.preventDefault();
 
     }, false);
 });
+
+function MakeVideoStream(inputcanvas, outputcanvas, ctxi, ctxo, tilergbs, tilenames) {
+
+    photos.innerHTML = '';
+
+    inputcanvas.setAttribute('width', width);
+    inputcanvas.setAttribute('height', height);
+
+    ctxi.drawImage(video, 0, 0, width, height);
+
+    let numRows = Math.ceil(inputcanvas.height / tileSize);
+    let numCols = Math.ceil(inputcanvas.width / tileSize);
+
+    let outputwidth = qualityup*numCols * tileSize;
+    let outputheight = qualityup*numRows * tileSize;
+
+    outputcanvas.setAttribute('width', outputwidth);
+    outputcanvas.setAttribute('height', outputheight);
+
+    for (let r = 0; r < numRows; r++) {
+        for (let c = 0; c < numCols; c++) {
+
+            let xcoord = c * tileSize;
+            let ycoord = r * tileSize;
+
+            let dataOfTile = ctxi.getImageData(xcoord, ycoord, tileSize, tileSize);
+
+            let data = dataOfTile.data;
+            let tilergbArray = [];
+
+            for (let k = 0; k < data.length; k +=4) {
+
+                let red = data[k];
+                let green = data[k+1];
+                let blue = data[k+1];
+                tilergbArray.push([red,green,blue]);
+            }
+
+            let nearestimage = findNearestTile(tilergbs, tilenames, tilergbArray);
+            ctxo.drawImage(nearestimage, qualityup*xcoord, qualityup*ycoord, qualityup*tileSize, qualityup*tileSize);
+        }
+    }
+
+    const outputUrl = outputcanvas.toDataURL('image/png');
+
+    // Create img element
+    const outputimg = document.createElement('img');
+
+    // Set img src
+    outputimg.setAttribute('src', outputUrl);
+
+    // Add img to photos
+    photos.appendChild(outputimg);
+
+}
+
+function AutoClick() {
+
+    photoButton.click();
+
+}
+
+videoButton.addEventListener('click', function(error) {
+
+    if (videoon == false) {
+
+        videoon = true;
+        document.getElementById("video-button").className = 'btn-off';
+        document.getElementById("video-button").innerHTML = "Stop Video Stream"
+        
+        intervalID = setInterval(AutoClick, 100); // scuffed function call, i know
+        console.log(intervalID);
+        console.log(videoon);
+
+    } else {
+        videoon = false;
+        document.getElementById("video-button").className = 'btn-on';
+        document.getElementById("video-button").innerHTML = "Start Video Stream"
+        try {
+
+            clearInterval(intervalID);
+
+        } catch(error) {
+
+            console.log(error);
+       }
+    }
+
+    error.preventDefault();
+}, false);
