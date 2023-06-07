@@ -5,56 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PhotomosaicProject155</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mainpagestyle.css">
 </head>
 <body>
     <div class="navbar">
-        <h1>Videomosaic</h1>
 
     </div>
-    <div class="top-container">
-        <h1>Input Camera</h1>
-        <video id="video">Something went wrong while trying to activate your camera... (Maybe you have your camera disabled?)</video>
-        <button id="video-button" class="btn-on">
-            Start Video Stream
-        </button>
-        <button id="photo-button" class="btn-on">
-        </button>
-        <!--<button id="clear-button">Clear</button>-->
-        <h1>Output Mosaic</h1>
-        <canvas id="canvas"></canvas>
-    </div>
-
-    <div class="bottom-container">
-
-        <div id="photos"></div>
-
-    </div>
-    <script src="main.js"></script>
-
-    <div class = "description">
-
-        <h2>What is a photomosaic?</h2>
-        <p>A "photomosaic" is a large, detailed picture that is made up of many, smaller photographs. 
-            From afar, the picture appears as a blurry rendition of some image, but as we zoom in, we can 
-            see the individual photos that act as "tiles" which comprise the bigger picture.
-        </p>
-        <img src="https://i.pinimg.com/originals/94/2f/2d/942f2d9c7c46fd294c17d623ee0c5237.jpg"
-        alt="Photomosaic of the Mona Lisa" width="500">
-        <p>
-            This project aims to implement this idea, where the "tiles" are created from famous paintings,
-            and the "bigger picture" is - you! More specifically your webcam, or whatever camera is attached
-            to the device you are using. (If you don't have a camera, then uhh, yeah it should be obvious
-            why this isn't working lol)
-        </p>
-        <p>
-            We can take this one step further. After all, a video is just a sequence of frames being played in 
-            rapid succession, and each individual frame is just an image! This project will convert a video stream
-            into a "photomosaic" stream - a "videomosaic"! (The FPS, frames-per-second, is highly dependent on
-            browser capability, with a cap at 10 FPS)
-        </p>
-
+    <div id="buttons">
+        <div class="buttonanim"><a class="button" href="photomosaic.html">Photomosaic</a></div>
+        <div class="buttonanim"><a class="button" href="videomosaic.html">Videomosaic</a></div>
+        <div class="buttonanim"><a class="button" href="about.html">About</a></div>
     </div>
 
 </body>
+
+
+
 </html>

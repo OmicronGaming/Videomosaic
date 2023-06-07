@@ -11,7 +11,7 @@ let width = 500,
     streaming = false,
     numphotos = 154,
     tileSize = 9, // length of one side of square in pixels
-    qualityup = 2,
+    qualityup = 3,
     videoon = false,
     intervalID = null;
 
@@ -52,7 +52,7 @@ navigator.mediaDevices.getUserMedia({video: true, audio: false})
             canvas.setAttribute('width', width);
             canvas.setAttribute('height', height);
 
-            tileSize = Math.round(Math.min(height, width) / 35);
+            tileSize = Math.round(Math.min(height, width) / 60);
 
             streaming = true;
         }
@@ -294,29 +294,7 @@ function AutoClick() {
 
 videoButton.addEventListener('click', function(error) {
 
-    if (videoon == false) {
-
-        videoon = true;
-        document.getElementById("video-button").className = 'btn-off';
-        document.getElementById("video-button").innerHTML = "Stop Video Stream"
-        
-        intervalID = setInterval(AutoClick, 100); // scuffed function call, i know
-        console.log(intervalID);
-        console.log(videoon);
-
-    } else {
-        videoon = false;
-        document.getElementById("video-button").className = 'btn-on';
-        document.getElementById("video-button").innerHTML = "Start Video Stream"
-        try {
-
-            clearInterval(intervalID);
-
-        } catch(error) {
-
-            console.log(error);
-       }
-    }
+    photoButton.click();
 
     error.preventDefault();
 }, false);
