@@ -10,7 +10,7 @@ let width = 500,
     streaming = false,
     numphotos = 154,
     tileSize = 9, // length of one side of square in pixels
-    qualityup = 2,
+    qualityup = 1,
     videoon = false,
     intervalID = null;
 
