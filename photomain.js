@@ -1,8 +1,3 @@
-/* 
-Code is a little scuffed because I 
-
-*/
-
 // Global Vars
 
 let width = 500,
@@ -176,7 +171,7 @@ async function buildArrays() {
 
         while (i < numphotos) {
             let image = new Image();
-            image.src = '../js/' + i + '.jpg';
+            image.src = i + '.jpg';
             tilenames[i] = image;
             i++;
         }
@@ -283,12 +278,6 @@ function MakeVideoStream(inputcanvas, outputcanvas, ctxi, ctxo, tilergbs, tilena
 
     // Add img to photos
     photos.appendChild(outputimg);
-
-}
-
-function AutoClick() {
-
-    photoButton.click();
 
 }
 
