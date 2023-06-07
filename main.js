@@ -232,8 +232,6 @@ buildArrays().then(rtrnvalue => {
 
 function MakeVideoStream(inputcanvas, outputcanvas, ctxi, ctxo, tilergbs, tilenames) {
 
-    photos.innerHTML = '';
-
     inputcanvas.setAttribute('width', width);
     inputcanvas.setAttribute('height', height);
 
@@ -281,6 +279,7 @@ function MakeVideoStream(inputcanvas, outputcanvas, ctxi, ctxo, tilergbs, tilena
     outputimg.setAttribute('src', outputUrl);
 
     // Add img to photos
+    photos.innerHTML = '';
     photos.appendChild(outputimg);
 
 }
