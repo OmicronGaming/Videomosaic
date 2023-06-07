@@ -299,7 +299,7 @@ videoButton.addEventListener('click', function(error) {
         document.getElementById("video-button").className = 'btn-off';
         document.getElementById("video-button").innerHTML = "Stop Video Stream"
         
-        intervalID = setInterval(AutoClick, 100); // scuffed function call, i know
+        intervalID = setInterval(AutoClick, 200); // scuffed function call, i know
         console.log(intervalID);
         console.log(videoon);
 
