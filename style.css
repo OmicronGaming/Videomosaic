@@ -105,6 +105,8 @@ body {
 
 .bottom-container {
     margin: auto;
+    width: min(90vw,  1000px);
+    height: min(60vw, 1000px);
 }
 
 #photos img {
