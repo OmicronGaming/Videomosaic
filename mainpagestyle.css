@@ -60,3 +60,16 @@ animation-delay: 0.15s;
 .buttonanim:nth-child(3) {
 animation-delay: 0.3s;
 }
+
+p {
+
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -75%);
+  color: #fff;
+  font-size: 12px;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+  animation-delay: 1s;
+}
